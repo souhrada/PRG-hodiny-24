@@ -1,4 +1,4 @@
-# 3G 23/24
+# 3G 24/25
 
 ## V tomto repozitáři naleznete kód z hodin
 
