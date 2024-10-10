@@ -5,6 +5,7 @@ def ukazka():
 ukazka()
 
 
+# ukázka použití parametru
 def rekni_cislo(n):
     print(n)
 
