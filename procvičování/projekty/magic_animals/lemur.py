@@ -1,5 +1,7 @@
 import sys
 
+
+# vytvoření dictionary, ve kterém jsou vypsané vlastnosti našeho zvířátka
 lemur = {
     "name": "Mortimer",
     "color": "purpleblack",
@@ -13,19 +15,26 @@ lemur = {
     "gambler": False,
 }
 
+# zde vytváříme hlavní funkci našeho programu
 def main():
 
 
-    # TODO: finish instructions
     while True:
+        # kontrola stavu lemura, která se spouští pokaždé před zadáním instrukce
         check_lemur_status()
+
+        # instrukce pro uživatele, trojité uvozovky nám umožňují psát v kódu na více řádků
         print("""
               Instructions: For feeding press F, press S for status, press X for exit,
               press P for play, press l to put lemur to sleep, press b to bathe lemur
               """)
         
+        # input uživatele, co chce dělat
         user_action = input("What do you want to do?")
         
+
+        # alternative k podmínkám if elif else, která může být v určitých případech čitelnější
+        # na základě zadaného písmenka spustíme požadovanou funkci
         match user_action.lower():
             case "f":
                 feeding()
@@ -44,23 +53,14 @@ def main():
             case _:
                 print("Wrong input")
 
-        
+
+# Zde jsou různé funkce našeho programu, od krmení, přes čištění, spánek atd.        
 
 def feeding():
     lemur["hunger"] -= 30
     if lemur["hunger"] < 0:
         lemur["alive"] = False
     
-
-def display_status():
-   print(f"Hunger: {lemur["hunger"]} \n Energy: {lemur["energy"]} \n Health: {lemur["health"]} \n Thirst: {lemur["thirst"]}")
-
-
-def display_attribute(attribute):
-    if attribute not in lemur:
-        print(f"Lemur doesn't have {attribute}")
-    else:
-        print(f"Current {attribute} is: {lemur[attribute]}")
 
 def pet_play():
     print(f"You've played fetch with {lemur["name"]}. {lemur["name"]} looks happy.")
@@ -78,6 +78,19 @@ def sleeping():
     lemur["energy"] = 100
     lemur["happiness"] = True
 
+# tato funkce je pro uživatele, pokud chce znát aktuální hodnoty lemura
+def display_status():
+   print(f"Hunger: {lemur["hunger"]} \n Energy: {lemur["energy"]} \n Health: {lemur["health"]} \n Thirst: {lemur["thirst"]}")
+
+# tato funkce nám umožní vypsat jednu samostatnou vlastnost
+def display_attribute(attribute):
+    if attribute not in lemur:
+        print(f"Lemur doesn't have {attribute}")
+    else:
+        print(f"Current {attribute} is: {lemur[attribute]}")
+
+# tuto funkci spouštíme na začátku kódu a kontroluje, jeslti je lemur na živu a celkově vytváří logiku hry
+# mění štěstí, pokud je lemur hladový atp.
 def check_lemur_status():
     if lemur["hunger"] > 100:
         lemur["alive"] == False
@@ -89,7 +102,7 @@ def check_lemur_status():
         sys.exit()
     
     
-
+# zde spouštíme hlavní funkci našeho programu, bývá vždy úplně na konci
 main()
     
 
