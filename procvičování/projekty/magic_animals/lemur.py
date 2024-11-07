@@ -18,26 +18,39 @@ def main():
 
     # TODO: finish instructions
     while True:
-
-        print("Instructions: For feeding press F, press S for status, press X for exit")
-
+        check_lemur_status()
+        print("""
+              Instructions: For feeding press F, press S for status, press X for exit,
+              press P for play, press l to put lemur to sleep, press b to bathe lemur
+              """)
+        
         user_action = input("What do you want to do?")
+        
+        match user_action.lower():
+            case "f":
+                feeding()
+                print(f"Lemur has been fed. Current hunger: {lemur["hunger"]}. Is lemur alive: {lemur["alive"]}")
+            case "x":
+                print("Exiting...")
+                sys.exit()
+            case "s":
+                display_status()
+            case "p":
+                pet_play()
+            case "l":
+                sleeping()
+            case "b":
+                bathing()
+            case _:
+                print("Wrong input")
 
-        if user_action.lower() == "f":
-            feeding()
-            print(f"Lemur has been fed. Current hunger: {lemur["hunger"]}. Is lemur alive: {lemur["alive"]}")
-        elif user_action.lower() == "x":
-            print("Exiting...")
-            sys.exit()
-        elif user_action.lower() == "s":
-            display_status()
-        else:
-            print("Wrong input")
+        
 
 def feeding():
     lemur["hunger"] -= 30
     if lemur["hunger"] < 0:
         lemur["alive"] = False
+    
 
 def display_status():
    print(f"Hunger: {lemur["hunger"]} \n Energy: {lemur["energy"]} \n Health: {lemur["health"]} \n Thirst: {lemur["thirst"]}")
@@ -50,12 +63,32 @@ def display_attribute(attribute):
         print(f"Current {attribute} is: {lemur[attribute]}")
 
 def pet_play():
-    print("You've played fetch with Mortimer. Mortimer looks happy.")
+    print(f"You've played fetch with {lemur["name"]}. {lemur["name"]} looks happy.")
     lemur["energy"] -= 10
+    lemur["hunger"] += 10
     if lemur["happiness"] == False:
         lemur["happiness"] = True
 
+def bathing():
+   print(f"{lemur["name"]} loves baths. {lemur["name"]} is clean now.")
+   lemur["cleanliness"] = 100
 
+def sleeping():
+    print(f"Your lullaby was very effective. {lemur["name"]} slept for 12 hours.")
+    lemur["energy"] = 100
+    lemur["happiness"] = True
+
+def check_lemur_status():
+    if lemur["hunger"] > 100:
+        lemur["alive"] == False
+    elif lemur["hunger"] > 75:
+        lemur["happiness"] == False
+
+    if lemur["alive"] == False:
+        print("Lemur died. :(")
+        sys.exit()
+    
+    
 
 main()
     
