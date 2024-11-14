@@ -16,6 +16,7 @@ lemur = {
     'gambler': False,
 }
 
+# na začátku programu zjistíme, jaký je čas
 original_time = dt.datetime.now()
 
 
@@ -67,13 +68,20 @@ def check_lemur_status():
         sys.exit()
 
 def check_time():
+    # TODO: global original_time
+    # momentálně kód vyhazuje chybu, bude potřeba doplnit (odkomentovat) řádek:
+    # global original_time
+
+    # zjišťujeme současný čas
     current_time = dt.datetime.now()
+
+    # pokud je původní čas + 30 minut větší než současný čas (uběhlo 30 minut) provedeme naší logiku
     if current_time > original_time + dt.timedelta(minutes=30):
         lemur['hunger'] += 10
         print(f"{lemur['name']} is getting hungry...")
-        original_time = current_time
+        original_time = current_time # aby náš kód pokračoval v kontrole každých 30 minut, musíme nahradit původní čas novým časem
     
-
+    # alternativní zápis podmínky by mohl být: if current_time - original_time > dt.timedelta(minutes=30)   (pokud je současný čas mínus původní více než 30 minut) 
 
 # zde vytváříme hlavní funkci našeho programu
 def main():
@@ -81,8 +89,9 @@ def main():
 
     while True:
         
-        
+        # spuštění funkce, která kontroluje čas
         check_time()
+
         # kontrola stavu lemura, která se spouští pokaždé před zadáním instrukce
         check_lemur_status()
 
