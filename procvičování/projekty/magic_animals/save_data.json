@@ -1,0 +1,12 @@
+{
+  "name": "Mortimer",
+  "color": "purpleblack",
+  "health": 100,
+  "hunger": 50,
+  "thirst": 0,
+  "cleanliness": 100,
+  "energy": 90,
+  "happiness": true,
+  "alive": true,
+  "gambler": false
+}
