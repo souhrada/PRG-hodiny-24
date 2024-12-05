@@ -20,7 +20,7 @@ students = [
     {"Name": "Jarmil", "School": "Oxford", "fav_color": "green"}
 ]
 
-with open(path, "w", encoding="utf-8") as file:
+with open(path, "w", encoding="utf-8", newline="") as file:
     writer = csv.DictWriter(file,fieldnames=["Name", "School", "fav_color"], delimiter=";") # v evropě oddělujeme csv pomocí středníků, nikoliv čárek
 
     writer.writeheader()

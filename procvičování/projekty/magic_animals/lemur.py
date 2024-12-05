@@ -2,24 +2,47 @@ import sys, json
 import datetime as dt
 
 # vytvoření dictionary, ve kterém jsou vypsané vlastnosti našeho zvířátka
-lemur = {
-    'name': "Mortimer",
-    'color': "purpleblack",
-    'health': 100,
-    'hunger': 50,
-    'thirst': 0,
-    'cleanliness': 100,
-    'energy': 90,
-    'happiness': True,
-    'alive': True,
-    'gambler': False,
-}
+lemur = {}
 
 # na začátku programu zjistíme, jaký je čas
 original_time = dt.datetime.now()
 
+path = "save_data.json"
 
 # Zde jsou různé funkce našeho programu, od krmení, přes čištění, spánek atd.        
+
+def save_game():
+    global lemur
+    global path
+    with open(path, mode="w") as file:
+        json.dump(lemur, file, indent=2)
+
+
+def load_game():
+    global lemur
+    global path
+    load_data = {}
+    with open(path, mode="r") as file:
+        load_data = json.load(file)
+
+    
+    if len(load_data) > 0:
+        lemur = load_data
+        print("loading")
+    else:
+        print("default")
+        lemur = {
+            'name': "Mortimer",
+            'color': "purpleblack",
+            'health': 100,
+            'hunger': 50,
+            'thirst': 0,
+            'cleanliness': 100,
+            'energy': 90,
+            'happiness': True,
+            'alive': True,
+            'gambler': False,
+        }
 
 def feeding():
     lemur['hunger'] -= 30
@@ -82,13 +105,13 @@ def check_time():
 
 # zde vytváříme hlavní funkci našeho programu
 def main():
-
+    load_game()
 
     while True:
         
         # spuštění funkce, která kontroluje čas
         check_time()
-
+        print(lemur)
         # kontrola stavu lemura, která se spouští pokaždé před zadáním instrukce
         check_lemur_status()
 
@@ -110,6 +133,7 @@ def main():
                 print(f"Lemur has been fed. Current hunger: {lemur['hunger']}. Is lemur alive: {lemur['alive']}")
             case "x":
                 print("Exiting...")
+                save_game()
                 sys.exit()
             case "s":
                 display_status()
@@ -121,7 +145,7 @@ def main():
                 bathing()
             case _:
                 print("Wrong input")
-
+        save_game()
     
 # zde spouštíme hlavní funkci našeho programu, bývá vždy úplně na konci
 main()
