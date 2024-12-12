@@ -106,49 +106,13 @@ def check_time():
 # zde vytváříme hlavní funkci našeho programu
 def main():
     load_game()
+    
 
-    while True:
-        
-        # spuštění funkce, která kontroluje čas
-        check_time()
-        print(lemur)
-        # kontrola stavu lemura, která se spouští pokaždé před zadáním instrukce
-        check_lemur_status()
 
-        # instrukce pro uživatele, trojité uvozovky nám umožňují psát v kódu na více řádků
-        print("""
-              Instructions: For feeding press F, press S for status, press X for exit,
-              press P for play, press l to put lemur to sleep, press b to bathe lemur
-              """)
-        
-        # input uživatele, co chce dělat
-        user_action = input("What do you want to do?")
-        
-
-        # alternative k podmínkám if elif else, která může být v určitých případech čitelnější
-        # na základě zadaného písmenka spustíme požadovanou funkci
-        match user_action.lower():
-            case "f":
-                feeding()
-                print(f"Lemur has been fed. Current hunger: {lemur['hunger']}. Is lemur alive: {lemur['alive']}")
-            case "x":
-                print("Exiting...")
-                save_game()
-                sys.exit()
-            case "s":
-                display_status()
-            case "p":
-                pet_play()
-            case "l":
-                sleeping()
-            case "b":
-                bathing()
-            case _:
-                print("Wrong input")
-        save_game()
     
 # zde spouštíme hlavní funkci našeho programu, bývá vždy úplně na konci
-main()
+if __name__ == "__main__":
+    main()
     
 
 
