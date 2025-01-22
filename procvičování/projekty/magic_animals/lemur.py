@@ -1,16 +1,18 @@
 import sys, json
-import datetime as dt
+import tkinter as tk
 
 # vytvoření dictionary, ve kterém jsou vypsané vlastnosti našeho zvířátka
 lemur = {}
 
-# na začátku programu zjistíme, jaký je čas
-original_time = dt.datetime.now()
+root = None
+text_label = None
+stats_label = None
 
 path = "save_data.json"
 
 # Zde jsou různé funkce našeho programu, od krmení, přes čištění, spánek atd.        
 
+# TODO: přidat tlačítko pro save hry
 def save_game():
     global lemur
     global path
@@ -42,13 +44,38 @@ def load_game():
             'happiness': True,
             'alive': True,
             'gambler': False,
-        }
+   
+     }
+
+def getting_hungry():
+    global root
+    lemur['hunger'] += 10
+    update_stats()
+    root.after(10000, getting_hungry)
+
+
+def update_stats():
+    global stats_label
+    stats_label.config(text=f"""
+                            Name: {lemur['name']}  
+                            Health: {lemur['health']}
+                            Hunger: {lemur['hunger']}
+                            Thirst: {lemur['thirst']}
+                            Energy: {lemur['energy']}
+                            Happiness: {lemur['happiness']}
+                                """)
+
 
 def feeding():
+    global text_label
+    text_label.config(text=f"{lemur['name']} has been fed.")
+    update_stats()
     lemur['hunger'] -= 30
     if lemur['hunger'] < 0:
         lemur['alive'] = False
     
+
+# TODO: upravit zbylé funkce pro TKinter, podobně jako funguje feeding()
 
 def pet_play():
     print(f"You've played fetch with {lemur['name']}. {lemur['name']} looks happy.")
@@ -66,19 +93,9 @@ def sleeping():
     lemur['energy'] = 100
     lemur['happiness'] = True
 
-# tato funkce je pro uživatele, pokud chce znát aktuální hodnoty lemura
-def display_status():
-   print(f"Hunger: {lemur['hunger']} \n Energy: {lemur['energy']} \n Health: {lemur['health']} \n Thirst: {lemur['thirst']}")
 
-# tato funkce nám umožní vypsat jednu samostatnou vlastnost
-def display_attribute(attribute):
-    if attribute not in lemur:
-        print(f"Lemur doesn't have {attribute}")
-    else:
-        print(f"Current {attribute} is: {lemur[attribute]}")
 
-# tuto funkci spouštíme na začátku kódu a kontroluje, jeslti je lemur na živu a celkově vytváří logiku hry
-# mění štěstí, pokud je lemur hladový atp.
+# TODO: implementovat s funkcí .after() pro TKinter
 def check_lemur_status():
     if lemur['hunger'] > 100:
         lemur['alive'] == False
@@ -89,23 +106,47 @@ def check_lemur_status():
         print("Lemur died. :(")
         sys.exit()
 
-def check_time():
-    global original_time
-
-    # zjišťujeme současný čas
-    current_time = dt.datetime.now()
-
-    # pokud je původní čas + 5 minut větší než současný čas (uběhlo 5 minut) provedeme naší logiku
-    if current_time > original_time + dt.timedelta(minutes=5):
-        lemur['hunger'] += 10
-        print(f"{lemur['name']} is getting hungry...")
-        original_time = current_time # aby náš kód pokračoval v kontrole každých 5 minut, musíme nahradit původní čas novým časem
-    
-    # alternativní zápis podmínky by mohl být: if current_time - original_time > dt.timedelta(minutes=5)   (pokud je současný čas mínus původní více než 30 minut) 
 
 # zde vytváříme hlavní funkci našeho programu
 def main():
+    global root, text_label, stats_label
+
     load_game()
+
+    root = tk.Tk()
+    
+    root.title(f"{lemur['name']}")
+    root.geometry("800x600")
+
+    lemur_image = tk.PhotoImage(file="lemur.png")
+
+    for x in range(3):
+        root.grid_rowconfigure(x, weight=1)
+        root.grid_columnconfigure(x, weight=1)
+
+
+    image_label = tk.Label(root, image=lemur_image)
+    image_label.grid(row=0, column=0)
+
+    text_label = tk.Label(root, text=f"Welcome.\n What would you like to do?")
+    text_label.grid(row=0, column=1)
+
+    stats_label = tk.Label(root, text=f"""
+                                    Name: {lemur['name']}  
+                                    Health: {lemur['health']}
+                                    Hunger: {lemur['hunger']}
+                                    Thirst: {lemur['thirst']}
+                                    Energy: {lemur['energy']}
+                                    Happiness: {lemur['happiness']}
+                                        """)
+    stats_label.grid(row=0, column=2)
+    
+
+    feed_button = tk.Button(root, text=f"Feed {lemur['name']}", command=feeding)
+    feed_button.grid(row=1, column=0)
+    
+    getting_hungry()
+    root.mainloop()
     
 
 
