@@ -4,15 +4,25 @@ from sys import exit
 # inicializuje hru - spustíme pygame
 pygame.init()
 
-
+# vytvoření animace monstra
 def monster_animation():
+    # importujeme globální proměnné, které jsme si pro monstrum vytvořili
     global monster_surf, monster_index, monster_run_all
-    monster_index += 0.1
 
+    # animace zjednodušeně - máme list (seznam), ve kterém jsou obrázky v různé fázi pohybu
+    # vykreslujeme vždy jeden z obrázků z listu
+    # posouváním indexu zvolíme, který obrázek se vykresluje
+    monster_index += 0.1 # index měníme pouze o 0.1, aby animace byla pomalejší
+
+    # pokud je index větší, než množství obrázků v listu, vyresetujeme index
     if monster_index > len(monster_run_all):
         monster_index = 0
     
-    monster_surf = monster_run_all[int(monster_index)]
+    # surface blitujeme v herní smyčce na obrozovku
+    # zde zvolíme, co bude surface, aneb co budeme vykreslovat na obrozovku
+    # Pozn.: jelikož měníme index o destinná čísla výše, 
+    # je potřeba jej zaokrouhlit zpět na celé číslo pomocí funkce int(), která vždy zaokrouhluje dolu
+    monster_surf = monster_run_all[int(monster_index)] 
 
 
 
@@ -101,6 +111,7 @@ while running:
 
     # monstrum se pohybuje zprava doleva
     monster_rect.left -= monster_speed
+    # zde spouštíme animaci
     monster_animation()
     screen.blit(monster_surf, monster_rect)
 
