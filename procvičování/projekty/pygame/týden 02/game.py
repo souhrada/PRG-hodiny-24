@@ -4,18 +4,6 @@ from sys import exit
 # inicializuje hru - spustíme pygame
 pygame.init()
 
-
-def monster_animation():
-    global monster_surf, monster_index, monster_run_all
-    monster_index += 0.1
-
-    if monster_index > len(monster_run_all):
-        monster_index = 0
-    
-    monster_surf = monster_run_all[int(monster_index)]
-
-
-
 # naše proměnné, které udávají výšku a šířku
 screen_height = 600
 screen_width = 800
@@ -27,6 +15,15 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
 
 running = True
+
+# Spoiler - animace monstra, bude probíráno 13.2.
+# def monster_animation():
+#     global monster_surf, monster_index
+#     monster_index += 0.1
+
+#     if monster_index > len(monster_walk):
+#         monster_index = 0
+#     monster_surf = monster_walk[int(monster_index)]
 
 # vytvoření hráče
 # nahrání obrázku
@@ -101,7 +98,6 @@ while running:
 
     # monstrum se pohybuje zprava doleva
     monster_rect.left -= monster_speed
-    monster_animation()
     screen.blit(monster_surf, monster_rect)
 
     # zapni časomíru - pod proměnnou přidávej čas
@@ -122,6 +118,7 @@ while running:
         # vypni nesmrtelnost
         invulnerability = False
 
+    print(player_lives)
 
 
     # updatuje vše
