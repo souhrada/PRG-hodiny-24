@@ -24,26 +24,6 @@ def monster_animation():
     # je potřeba jej zaokrouhlit zpět na celé číslo pomocí funkce int(), která vždy zaokrouhluje dolu
     monster_surf = monster_run_all[int(monster_index)] 
 
-def animation(direction):
-    global player_index, player_img
-    frame_count = 3
-
-    player_index += 0.1
-    if player_index >= frame_count:
-        player_index = 0
-    
-    player_img = image_cutter(player_spritesheet, int(player_index), direction, 15, 16, 3)
-
-    
-
-def image_cutter(sheet, frame_x, frame_y, width, height, scale):
-    img = pygame.Surface((width, height)).convert_alpha()
-    img.blit(sheet, (0,0), ((frame_x * width), (frame_y * height), width, height))
-    img = pygame.transform.scale(img, (width*scale, height*scale))
-    img.set_colorkey((0, 0, 0))
-    return img
-
-
 
 
 # naše proměnné, které udávají výšku a šířku
@@ -60,16 +40,13 @@ running = True
 
 # vytvoření hráče
 # nahrání obrázku
-# player_surf = pygame.image.load("arnost.png").convert_alpha()
+player_surf = pygame.image.load("arnost.png").convert_alpha()
 # zvětšení obrázku (rotozoom umí i rototovat, to my nechceme, proto hodnota 0)
-# player_surf = pygame.transform.rotozoom(player_surf, 0, 1.5)
+player_surf = pygame.transform.rotozoom(player_surf, 0, 1.5)
 player_x = 150
 player_y = 150
 # vytvoření rectangle, který nám umožní sledovat kolize a přesněji umístit obrázek do herní plochy
-player_spritesheet = pygame.image.load("man_brownhair_run.png").convert_alpha()
-player_img = image_cutter(player_spritesheet, 0, 0, 15, 16, 3)
-player_rect = player_img.get_rect(midbottom=(player_x, player_y))
-player_index = 0
+player_rect = player_surf.get_rect(midbottom=(player_x, player_y))
 player_speed = 10
 player_lives = 3
 # Počáteční nastavení nesmrtelnosti
@@ -112,16 +89,12 @@ while running:
 
     # pokud je stisknutá klávesa w, pohni hráčem o (x, y)
     if key[pygame.K_w]:
-        animation(1)
         player_rect.top -= player_speed
     if key[pygame.K_a]:
-        animation(2)
         player_rect.left -= player_speed
     if key[pygame.K_s]:
-        animation(0)
         player_rect.bottom += player_speed
     if key[pygame.K_d]:
-        animation(3)
         player_rect.right += player_speed
 
   
@@ -134,7 +107,7 @@ while running:
     screen.blit(text_lives, (screen_width-100, 10))
 
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
-    screen.blit(player_img, player_rect)
+    screen.blit(player_surf, player_rect)
 
     # monstrum se pohybuje zprava doleva
     monster_rect.left -= monster_speed
