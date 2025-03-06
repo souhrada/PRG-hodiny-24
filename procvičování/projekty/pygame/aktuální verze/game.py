@@ -24,6 +24,9 @@ def monster_animation():
     # je potřeba jej zaokrouhlit zpět na celé číslo pomocí funkce int(), která vždy zaokrouhluje dolu
     monster_surf = monster_run_all[int(monster_index)] 
 
+# funkce na animování hráče, přijímá parametr direction, čímž měníme řadu, ze které vyřezáváme, viz funkce image_cutter
+# v našem spritesheetu řada udává směr animace panáčka
+# zbytek funkce je podobný funkci animování monstra, s výjimkou, že musíme manuálně napsat, kolik máme framů (nelze to odvodit z velikosti listu, jako to bylo výše)
 def animation(direction):
     global player_index, player_img
     frame_count = 3
@@ -35,13 +38,18 @@ def animation(direction):
     player_img = image_cutter(player_spritesheet, int(player_index), direction, 15, 16, 3)
 
     
-
+# funkce na vyřezávání obrázku ze spritesheetu (spritesheet je obrázek se všemi framy, ze kterých se skládá animace)
+# funkce přijímá parametry - spritesheet, začátek vyřezávání na x, začátek vyřezávání na y, šířku, výšku a zvětšení
 def image_cutter(sheet, frame_x, frame_y, width, height, scale):
-    img = pygame.Surface((width, height)).convert_alpha()
+    img = pygame.Surface((width, height)).convert_alpha() # nejprve vytvoříme Surface, na který poté vykreslíme správnou část spritesheetu
+    # na surface blitneme část spritesheetu, na surface blitujeme z 0,0
+    # frame_x je číslo, kterým budeme manipulovat a určuje, kde na ose x vyřezáváme - násobíme jej vždy šířkou - např. 2 * šířka začne vyřezávat ve třetím sloupci framů  (např. 2*15 začne vyřezávat z 30 pixelu na x, takže ignoruje první dva framy)
+    # frame_y je číslo, kterým budeme manipulovat a určuje, kde na ose y vyřezáváme - násobíme jej vždy výškou - např. 3 * výška začne vyřezávat ve čtvrté řadě spritesheetu framů (např. 3*15 začne vyřezávat z 45 pixelu na y, takže ignoruje první tři řady)
+    # výška a šířka udává velikost vyřezávátka
     img.blit(sheet, (0,0), ((frame_x * width), (frame_y * height), width, height))
-    img = pygame.transform.scale(img, (width*scale, height*scale))
-    img.set_colorkey((0, 0, 0))
-    return img
+    img = pygame.transform.scale(img, (width*scale, height*scale)) # obrázek zvětšíme, pokud je potřeba
+    img.set_colorkey((0, 0, 0)) # tento údaj změní černou barvu na průhlednou, což je potřeba pro správné vykreslení průhlednosti
+    return img # funkce vrátí vytvořený obrázek
 
 
 
@@ -62,12 +70,13 @@ running = True
 # nahrání obrázku
 # player_surf = pygame.image.load("arnost.png").convert_alpha()
 # zvětšení obrázku (rotozoom umí i rototovat, to my nechceme, proto hodnota 0)
-# player_surf = pygame.transform.rotozoom(player_surf, 0, 1.5)
 player_x = 150
 player_y = 150
-# vytvoření rectangle, který nám umožní sledovat kolize a přesněji umístit obrázek do herní plochy
+# načtení souboru se spritesheetem
 player_spritesheet = pygame.image.load("man_brownhair_run.png").convert_alpha()
+# první zavolání funkce image_cutter, která nám vykreslí výchozí obrázek pro hráče
 player_img = image_cutter(player_spritesheet, 0, 0, 15, 16, 3)
+# vytvoření rectangle, který nám umožní sledovat kolize a přesněji umístit obrázek do herní plochy
 player_rect = player_img.get_rect(midbottom=(player_x, player_y))
 player_index = 0
 player_speed = 10
