@@ -13,18 +13,18 @@ class Player(pygame.sprite.Sprite):
         self.speed = 10
         self.lives = 3
         self.invulnerability = False
-        self.frame_count = 3
     
-    def animation(self, row):
+    def animation(self, direction):
+        frame_count = 3
 
         self.index += 0.1
-        if self.index >= self.frame_count:
+        if self.index >= frame_count:
             self.index = 0
         
-        self.image = image_cutter(self.spritesheet, int(self.index), row, 15, 16, 3)
+        self.image = image_cutter(self.spritesheet, int(self.index), direction, 15, 16, 3)
 
 
-    def update(self, monster_group):
+    def update(self):
         key = pygame.key.get_pressed()
 
         if key[pygame.K_w]:
@@ -39,11 +39,6 @@ class Player(pygame.sprite.Sprite):
         if key[pygame.K_d]:
             self.animation(3)
             self.rect.right += self.speed
-        
-
-
-        if pygame.sprite.spritecollide(self, monster_group, False):
-            print("Aaaaa...")
     
     def draw(self, screen):
         screen.blit(self.img, self.rect)
