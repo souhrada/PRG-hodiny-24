@@ -35,6 +35,13 @@ player.add(Player())
 font = pygame.font.Font("assets/fonts/PixelifySans-Regular.ttf", 25)
 
 
+
+
+
+
+# Počáteční hodnota časomíry
+elapsed_time = 0
+
 # herní smyčka
 while running:
     # kontroluje nám události, které se dějí v naší hře
@@ -54,17 +61,37 @@ while running:
     screen.fill("white")
 
     # render fontu
-    text_lives = font.render(f"Lives: {player.sprite.lives}", False, "#000000") 
+    # text_lives = font.render(f"Lives: {player_lives}", False, "#000000") 
     # vykreslení textu na obrazovku
-    screen.blit(text_lives, (screen_width-100, 10))
+    # screen.blit(text_lives, (screen_width-100, 10))
 
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
     
     player.draw(screen)
-    player.update(monsters, clock)
+    player.update(monsters)
     
     monsters.draw(screen)
     monsters.update()
+
+
+    # zapni časomíru - pod proměnnou přidávej čas
+    elapsed_time += clock.get_time()
+
+    
+
+    # pokud nastane kolize mezi hráčem a monstrem
+    # if player_rect.colliderect(monster_rect):
+    #     # pokud hráč není nesmrtelný - alternativa zápisu if invulnerability == False
+    #     if not invulnerability:
+    #         player_lives -= 1 # odeber život
+    #         invulnerability = True # zapni nesmrtelnost
+    #         elapsed_time = 0 # vynuluj časomíru
+
+    # pokud uběhly 2 sekundy
+    if elapsed_time > 2000:
+        # vypni nesmrtelnost
+        invulnerability = False
+
 
 
     # updatuje vše
