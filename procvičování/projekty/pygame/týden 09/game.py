@@ -23,7 +23,7 @@ clock = pygame.time.Clock()
 
 running = True
 
-background_img = pygame.image.load("assets/world/background.png")
+
 
 monsters = pygame.sprite.Group()
 monsters.add(Monster(3, 500, 200), Monster(1, 500, 400))
@@ -51,7 +51,7 @@ while running:
 
   
     # obarví obrazovku na bílo
-    screen.blit(background_img, (0,0))
+    screen.fill("white")
 
     # render fontu
     text_lives = font.render(f"Lives: {player.sprite.lives}", False, "#000000") 
