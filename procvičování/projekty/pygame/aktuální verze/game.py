@@ -99,3 +99,5 @@ while running:
 
     # omez tickrate (rychlost hry) na 60fps, ať je to konzistentní napříč zařízeními
     clock.tick(60)
+
+#TODO: Zakomponujte přidávání bodů, když hráč narazí na náš game object
