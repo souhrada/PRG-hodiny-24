@@ -6,29 +6,9 @@ from settings import *
 from utility import image_cutter
 from player import Player
 from monster import Monster
-import json
-from game_objects import GameObject
 
 # inicializuje hru - spustíme pygame
 pygame.init()
-
-
-furniture_group = pygame.sprite.Group()
-
-def create_furniture():
-    path_to_json = "assets/world/data.json"
-    with open(path_to_json, mode="r") as file:
-        data = json.load(file)
-    
-    for entity in data["entities"]["Furniture"]:
-        x = entity["x"]
-        y = entity["y"]
-        w = entity["width"]
-        h = entity["height"]
-        furniture = GameObject(x, y, w, h)
-        furniture_group.add(furniture)
-
-
 
 
 
@@ -54,8 +34,6 @@ player.add(Player())
 # Vytvoření fontu k vykreslení životů - pokud nechcete vlastní font, použijte None (bez uvozovek) místo názvu fontu
 font = pygame.font.Font("assets/fonts/PixelifySans-Regular.ttf", 25)
 
-create_furniture()
-
 
 # herní smyčka
 while running:
@@ -80,9 +58,6 @@ while running:
     # vykreslení textu na obrazovku
     screen.blit(text_lives, (screen_width-100, 10))
 
-    furniture_group.draw(screen)
-
-
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
     
     player.draw(screen)
@@ -90,7 +65,6 @@ while running:
     
     monsters.draw(screen)
     monsters.update()
-
 
 
     # updatuje vše

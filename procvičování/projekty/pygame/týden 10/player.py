@@ -54,4 +54,4 @@ class Player(pygame.sprite.Sprite):
                 self.elapsed_time = 0 # vynuluj časomíru
     
     def draw(self, screen):
-        screen.blit(self.image, self.rect)
+        screen.blit(self.img, self.rect)
