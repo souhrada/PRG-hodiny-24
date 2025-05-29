@@ -13,52 +13,6 @@
 		"Grass.png"
 	],
 	"entities": {
-		"Egg": [
-			{
-				"id": "Egg",
-				"iid": "e8dc4060-3740-11f0-83ff-e9a7ebcab22c",
-				"layer": "Egg",
-				"x": 80,
-				"y": 64,
-				"width": 16,
-				"height": 16,
-				"color": 14120515,
-				"customFields" : {}
-			},
-			{
-				"id": "Egg",
-				"iid": "e98c5680-3740-11f0-83ff-59380e44a76c",
-				"layer": "Egg",
-				"x": 688,
-				"y": 64,
-				"width": 16,
-				"height": 16,
-				"color": 14120515,
-				"customFields" : {}
-			},
-			{
-				"id": "Egg",
-				"iid": "ea339300-3740-11f0-83ff-7929e3f84688",
-				"layer": "Egg",
-				"x": 64,
-				"y": 528,
-				"width": 16,
-				"height": 16,
-				"color": 14120515,
-				"customFields" : {}
-			},
-			{
-				"id": "Egg",
-				"iid": "eae30ce0-3740-11f0-83ff-89438a4cd86d",
-				"layer": "Egg",
-				"x": 688,
-				"y": 544,
-				"width": 16,
-				"height": 16,
-				"color": 14120515,
-				"customFields" : {}
-			}
-		],
 		"Furniture": [
 			{
 				"id": "Furniture",

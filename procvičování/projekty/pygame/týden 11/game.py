@@ -8,13 +8,31 @@ from player import Player
 from monster import Monster
 import json
 from game_objects import GameObject
-from level import Level
 
 # inicializuje hru - spustíme pygame
 pygame.init()
 
 
 furniture_group = pygame.sprite.Group()
+
+def create_furniture():
+    path_to_json = "assets/world/data.json"
+    with open(path_to_json, mode="r") as file:
+        data = json.load(file)
+    
+    for entity in data["entities"]["Furniture"]:
+        x = entity["x"]
+        y = entity["y"]
+        w = entity["width"]
+        h = entity["height"]
+        furniture = GameObject(x, y, w, h)
+        furniture_group.add(furniture)
+
+
+
+
+
+
     
 
 # vytvoříme obraz
@@ -36,17 +54,7 @@ player.add(Player())
 # Vytvoření fontu k vykreslení životů - pokud nechcete vlastní font, použijte None (bez uvozovek) místo názvu fontu
 font = pygame.font.Font("assets/fonts/PixelifySans-Regular.ttf", 25)
 
-egg_group = pygame.sprite.Group()
-
-
-sprite_groups = {
-    "Furniture": furniture_group,
-    "Egg": egg_group,
-}
-
-level_data = "assets/world/data.json"
-
-level = Level(screen, background_img, level_data, sprite_groups)
+create_furniture()
 
 
 # herní smyčka
@@ -72,7 +80,8 @@ while running:
     # vykreslení textu na obrazovku
     screen.blit(text_lives, (screen_width-100, 10))
 
-    level.draw_objects()
+    furniture_group.draw(screen)
+
 
     # na obrazovku vykresli - surface na rectangle (recntagle má souřadnice, viz výše)
     
