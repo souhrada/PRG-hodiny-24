@@ -1,6 +1,6 @@
 import pygame
 import json
-import game_objects
+from game_objects import GameObject
 
 class Level:
     def __init__(self, screen, background, level_data, sprite_groups):
@@ -25,7 +25,6 @@ class Level:
             y = entity["y"]
             w = entity["width"]
             h = entity["height"]
-            class_name = getattr(game_objects, object_type)
-            game_object = class_name(x, y, w, h)
+            game_object = GameObject(x, y, w, h)
             group.add(game_object)
    

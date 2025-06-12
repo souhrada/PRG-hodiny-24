@@ -52,44 +52,6 @@ class Player(pygame.sprite.Sprite):
                 self.lives -= 1 # odeber život
                 self.invulnerability = True # zapni nesmrtelnost
                 self.elapsed_time = 0 # vynuluj časomíru
-
-
-        # Alternativa pohybu a řešení neprůchodných kolizí:
-
-        # dx = 0
-        # dy = 0
-
-        # key = pygame.key.get_pressed()
-        # if key[pygame.K_LEFT]:
-        #     dx -= self.speed
-        #     self.animation(2)
-        # elif key[pygame.K_RIGHT]:
-        #     dx += self.speed
-        #     self.animation(3)
-        # elif key[pygame.K_UP]:
-        #     dy -= self.speed
-        #     self.animation(1)
-        # elif key[pygame.K_DOWN]:
-        #     dy += self.speed
-        #     self.animation(0)
-
-        
-        # self.rect.x += dx
-        # self.rect.y += dy
-
-        # for chair in pygame.sprite.spritecollide(self, furniture_group, False):
-        #     # Pohyb doprava
-        #     if dx > 0:
-        #         self.rect.right = chair.rect.left
-        #     # Pohyb doleva
-        #     if dx < 0:
-        #         self.rect.left = chair.rect.right
-        #     # Pohyb dolu
-        #     if dy > 0:
-        #         self.rect.bottom = chair.rect.top
-        #     # Pohyb nahoru
-        #     if dy < 0:
-        #         self.rect.top = chair.rect.bottom
     
     def draw(self, screen):
         screen.blit(self.image, self.rect)
