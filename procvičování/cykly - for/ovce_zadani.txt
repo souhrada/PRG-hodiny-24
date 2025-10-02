@@ -17,5 +17,6 @@ pes
 
 Bonus:
 Pokud máme víc než 10 ovcí, náhodná ovce je růžová
+
 Bonus 2:
 Pokud je více než 15 ovcí, jedna ovce je vlk a okolní ovce jsou označené k sežrání
