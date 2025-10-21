@@ -1,6 +1,5 @@
 1. Napište funkci pocitani(n), která vypíše čísla od 1 do n.
 Program je pověrčivý a přeskakuje číslo 13
-break -> ukončí cyklus
 continue -> přeskoč zbytek tohohle kola cyklu ale pokračuj
 
 2. Napište funkci zigzag(n), která vypíše čísla od 1 do n do výpisu pod sebe, přičemž sudá čísla odsadí.
