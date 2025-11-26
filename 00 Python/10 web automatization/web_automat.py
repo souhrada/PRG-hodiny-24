@@ -26,7 +26,10 @@ def main():
 
         page.click('button#loginbtn')
 
-
+        # page.wait_for_timeout(1000) # čeká 1 sekundu
+        # page.wait_for_selector('#nahodny_prvek') # čeká na konkrétní element
+        # element = page.locator('#nahodny_prvek') # uloží element pod proměnnou
+        # text_elementu = element.text_content() # získá textový obsah elementu
 
 
         input("Zmáčkni jakoukoliv klávesu pro zavření prohlížeče")
