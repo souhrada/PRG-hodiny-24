@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://beoal0i1yh705"]
+
+[node name="Scoreboard" type="CanvasLayer"]
+
+[node name="Score" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ScoreLabel" type="Label" parent="Score"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.026
+anchor_right = 0.026
+anchor_bottom = 0.018000001
+offset_top = -5.0
+offset_right = 61.000004
+offset_bottom = 18.0
+text = "Score: 0"

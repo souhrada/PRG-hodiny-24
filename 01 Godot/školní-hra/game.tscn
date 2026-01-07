@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://m8jan4kyvl1n"]
+[gd_scene load_steps=10 format=4 uid="uid://m8jan4kyvl1n"]
 
 [ext_resource type="PackedScene" uid="uid://bnmrk1yfjs3e8" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://c6d7vu7h5sidr" path="res://assets/sprites/world_tileset.png" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dh8ckuri5okly" path="res://enemy_slime.tscn" id="4_7jktm"]
 [ext_resource type="PackedScene" uid="uid://b23oxrud3stv7" path="res://killzone.tscn" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://dgsjjwrqcca2d" path="res://coin.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://beoal0i1yh705" path="res://scoreboard.tscn" id="6_ryrav"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("3_feb5d")
@@ -191,3 +194,19 @@ position_smoothing_enabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(40, 112)
 shape = SubResource("WorldBoundaryShape2D_7jktm")
+
+[node name="EnemySlime" parent="." instance=ExtResource("4_7jktm")]
+position = Vector2(485, 51)
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("5_7jktm")]
+position = Vector2(56, 25)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("5_7jktm")]
+position = Vector2(105, 25)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("5_7jktm")]
+position = Vector2(167, -7)
+
+[node name="Scoreboard" parent="." instance=ExtResource("6_ryrav")]
