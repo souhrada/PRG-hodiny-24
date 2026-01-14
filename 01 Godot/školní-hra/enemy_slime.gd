@@ -7,9 +7,14 @@ var direction = 1
 @onready var ray_cast_l: RayCast2D = $RayCastL
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+@export var is_walking = true
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if !is_walking:
+		return
+	
 	if ray_cast_r.is_colliding():
 		direction = -1
 		animated_sprite_2d.flip_h = true

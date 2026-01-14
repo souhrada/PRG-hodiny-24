@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://m8jan4kyvl1n"]
+[gd_scene load_steps=11 format=4 uid="uid://m8jan4kyvl1n"]
 
 [ext_resource type="PackedScene" uid="uid://bnmrk1yfjs3e8" path="res://player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://c8k4jxjx0n7dc" path="res://game_manager.gd" id="1_eow3j"]
 [ext_resource type="Texture2D" uid="uid://c6d7vu7h5sidr" path="res://assets/sprites/world_tileset.png" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://dh8ckuri5okly" path="res://enemy_slime.tscn" id="4_7jktm"]
 [ext_resource type="PackedScene" uid="uid://b23oxrud3stv7" path="res://killzone.tscn" id="4_fc0e3"]
@@ -175,6 +176,12 @@ sources/0 = SubResource("TileSetAtlasSource_fc0e3")
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_eow3j")
+
+[node name="Scoreboard" parent="GameManager" instance=ExtResource("6_ryrav")]
+
 [node name="World" type="Node2D" parent="."]
 
 [node name="Layer0" type="TileMapLayer" parent="World"]
@@ -195,9 +202,6 @@ position_smoothing_enabled = true
 position = Vector2(40, 112)
 shape = SubResource("WorldBoundaryShape2D_7jktm")
 
-[node name="EnemySlime" parent="." instance=ExtResource("4_7jktm")]
-position = Vector2(485, 51)
-
 [node name="Coins" type="Node" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource("5_7jktm")]
@@ -209,4 +213,11 @@ position = Vector2(105, 25)
 [node name="Coin3" parent="Coins" instance=ExtResource("5_7jktm")]
 position = Vector2(167, -7)
 
-[node name="Scoreboard" parent="." instance=ExtResource("6_ryrav")]
+[node name="Enemies" type="Node" parent="."]
+
+[node name="EnemySlime" parent="Enemies" instance=ExtResource("4_7jktm")]
+position = Vector2(485, 51)
+
+[node name="EnemySlime2" parent="Enemies" instance=ExtResource("4_7jktm")]
+position = Vector2(72, -45)
+is_walking = false
