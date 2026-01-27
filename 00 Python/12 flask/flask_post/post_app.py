@@ -60,12 +60,11 @@ def form():
 
 @app.route("/result")
 def result():
-    name = request.args.get("jinja_name", default="____")
-    input_class = request.args.get("jinja_class", default="____")
-    message = request.args.get("jinja_message", default="____")
-    random_number = random.randint(0, 10)
+    cursor = get_db().cursor()
+    cursor.execute("SELECT * FROM students")
+    rows = cursor.fetchall()
+    return render_template("result.html", rows=rows)
 
-    return render_template("result.html", jinja_name=name, jinja_class=input_class, jinja_message=message, number=random_number)
 
 if __name__ == "__main__":
     init_db()

@@ -4,14 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        * {
+            font-family: monospace;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        th {
+            padding: 10px 15px;
+            background-color: cornflowerblue;
+            color: white;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px 15px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dadada;
+        }
+
+        tr:hover {
+            background-color: #bbb;
+        }
+    </style>
 </head>
 <body>
-    <p>
-        Person named {{ jinja_name }} from class {{ jinja_class }} sends you following message {{ jinja_message }}
-    </p>
 
-    <p>
-        Random number {{ number }}
-    </p>
+    <table border="1">
+        <tr> 
+            <th>ID</th>   
+            <th>Name</th>
+            <th>Class</th>
+            <th>Age</th>
+            <th>Message</th>
+        </tr>
+
+        {% for row in rows %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+
+
+
 </body>
 </html>
