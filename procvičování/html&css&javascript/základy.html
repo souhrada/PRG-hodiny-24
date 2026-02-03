@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Základy</title> 
+    <style>
+        #mini-nadpis {
+            color: white;
+            background-color: blueviolet;
+            font-family: monospace;
+            text-align: center;
+        }
+
+        .form-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 2px solid black;
+        }
+
+        .form-wrapper > h2 {
+            color: burlywood;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: red">Nadpis</h1>
+    <h6 id="mini-nadpis">Nejmenší nadpis</h6>
+    <span>Span</span> 
+    <span>Span</span> 
+    <div>Div</div>
+    <div>Div</div>
+    <a href="https://www.google.com">Google?</a>
+    <img src="" alt="">
+
+    <br>
+
+    <div class="form-wrapper">
+        <h2>Formulář</h2>
+        <form action="">
+            <label for="jmeno">Jméno:</label>
+            <input type="text" id="jmeno"> <br>
+
+            <label for="trida">Třída:</label>
+            <input type="text" id="trida"> <br>
+
+            <label for="maturita-check">Maturita???</label>
+            <input type="checkbox" id="maturita-check"> <br>
+
+            <label for="ano">Ano</label>
+            <input type="radio" name="maturita" id="ano">
+            <label for="ne">Ne</label>
+            <input type="radio" name="maturita" id="ne"> <br>
+
+            <button>Odeslat</button>
+        </form>
+    </div>
+    <h2>Kdo nedá maturitu</h2>
+    <ul>
+        <li>Bosák</li>
+        <li>Rašík</li>
+        <li>Kakeš</li>
+    </ul>
+
+
+
+</body>
+</html>
