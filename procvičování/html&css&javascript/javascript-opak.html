@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        
+        button {
+            border-radius: 5000px;
+            border: none;
+            background-color: blueviolet;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        
+        button img {
+            height: 10px;
+            margin-right: 5px;
+        }
+        
+        button:hover {
+            background-color: rgb(161, 125, 196);
+        }
+
+        .bg-black {
+            background-color: black;
+        }
+        </style>
+</head>
+<body>
+    <h1 class="header">Opakování</h1>
+    <button class="btn"><img src="icon.svg" alt="">Click</button>
+    <button class="btn-bg"><img src="icon.svg" alt="">Background</button>
+    <script>
+        console.log("Unfreze!")
+
+        for (let i = 1; i < 6; i++ ) {
+            console.log(i)
+        }
+
+        for (let i = 1; i < 6; i++) {
+            console.log(i + ". hi")
+        }
+
+        const btn = document.querySelector(".btn")
+        const btnBG = document.querySelector(".btn-bg")
+        const header = document.querySelector(".header")
+        const body = document.querySelector("body")
+
+        btn.addEventListener("click", function () {
+            header.style.color = "red"
+            header.style.fontSize = "100px"
+        })
+
+        btnBG.addEventListener("click", function () {
+            body.classList.toggle("bg-black")
+        })
+    </script>
+</body>
+</html>
