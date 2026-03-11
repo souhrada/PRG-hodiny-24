@@ -1,12 +1,20 @@
 <script>
 import { shared } from "$lib/shared.svelte"
+let { level }  = $props()
 
 let upgradeClicked = $state(false)
 
 
 function upgrade() {
+    if (level === 1) {
+        shared.multi = 2
+    } else if (level === 2) {
+        shared.multi = 5
+    } else if (level === 3) {
+        shared.multi = 10
+    }
     upgradeClicked = true
-    shared.multi = 2
+    
 }
 </script>
 
@@ -25,7 +33,7 @@ function upgrade() {
 
 <style>
     button {
-        background-color: rgb(113, 113, 236);
+        background-color: var(--color);
         border: none;
         padding: 10px 20px;
         border-radius: 10000px;
@@ -50,5 +58,6 @@ function upgrade() {
         gap: 10px;
         background-color: rgba(180, 180, 247, 0.3);
         font-family: monospace;
+        display: inline-block;
     }
 </style>

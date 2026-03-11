@@ -11,6 +11,7 @@
         border: none;
         padding: 10px 20px;
         border-radius: 10000px;
+        display: block;
     }
 
     button:hover {
