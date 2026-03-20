@@ -10,6 +10,8 @@ import Cheats from "../components/Cheats.svelte"
 
 let animScore = $state()
 
+let cheatsVisibility = $state(true)
+
 $effect( () => {
     if (shared.score > 0) {
         animScore = "anim-score"
@@ -31,8 +33,11 @@ $effect( () => {
 <Upgrade level={2} --color="rgb(236, 113, 113)"/>
 <Upgrade level={3} --color="rgb(113, 236, 113)"/>
 <Autoclicker />
-<Cheats />
 
+<button class="cheats-icon" onclick={cheatsVisibility=!cheatsVisibility}>🥷</button>
+{#if !cheatsVisibility}
+<Cheats />
+{/if}
 
 
 
@@ -46,6 +51,12 @@ $effect( () => {
 
     .anim-score {
         animation: popout 0.1s;
+    }
+
+    .cheats-icon {
+        position: absolute;
+        top: 5%;
+        right: 5%;
     }
 
     @keyframes popout {

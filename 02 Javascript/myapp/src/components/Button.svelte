@@ -16,9 +16,14 @@
         border: none;
         padding: 10px 20px;
         border-radius: 10000px;
+        transition: 0.2s ease;
     }
 
     button:hover {
         background-color: rgb(161, 216, 97);
+    }
+
+    button:active {
+        transform: scale(0.8);
     }
 </style>
