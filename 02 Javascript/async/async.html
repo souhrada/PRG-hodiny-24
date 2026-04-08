@@ -26,8 +26,19 @@
         }
 
         async function showData() {
-            
+            const catFact = await fetchData(api)
+
+            if (catFact) {
+                console.log(catFact.fact)
+                console.log(catFact["fact"])
+
+                let newParagraph = document.createElement("p")
+                newParagraph.textContent = catFact["fact"]
+                document.querySelector("body").append(newParagraph)
+            }
         }
+
+        showData()
 
          
 
